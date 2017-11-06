@@ -1,0 +1,41 @@
+<h1>Liste des joueurs</h1>
+<form method="get" name="formulaire" action="{{ url('footballer.new') }}">
+  <button type="submit">Ajouter</button>
+</form>
+<table>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>NOM</th>
+    <th>PRENOM</th>
+    <th>POSTE</th>
+    <th>MAITRE</th>
+    <th>ACTION</th>
+  </tr>
+</thead>
+<tbdoy>
+{% for footballer in footballer %}
+   <tr>
+     <td>{{footballer.id}}</td>
+     <td>{{footballer.nom}}</td>
+     <td>{{footballer.prenom}}</td>
+     <td>{{footballer.poste}}</td>
+     {% for user in user %}
+     {% if footballer.idmaster==user.id %}
+     <td>{{user.nom}}</td>
+     {% endif %}
+     {% endfor %}
+     <td>
+       <form method="post" name="formulaire" action="{{ url('footballer.delete', {id: footballer.id}) }}">
+            <button type="submit">Supprimer</button>
+        </form>
+      </td>
+      <td>
+        <form method="get" name="formulaire" action="{{ url('footballer.edit', {id: footballer.id}) }}">
+          <button type="submit">Modifier</button>
+        </form>
+      </td>
+   </tr>
+{% endfor %}
+</tbdoy>
+</table>

@@ -1,0 +1,51 @@
+<h2>Formulaire</h2>
+
+{% if footballer is defined %}
+<form method="post" name="formulaire" action="{{ url('footballer.save', {id: footballer.id}) }}">
+
+    <input type="hidden" name="id" value={{footballer.id}} />
+
+    <label for="name">Nom : </label>
+    <input type="text" name="nom" value={{footballer.nom}} />
+
+    <label for="name">Prénom : </label>
+    <input type="text" name="prenom" value={{footballer.prenom}}  />
+
+    <label for="name">Poste : </label>
+    <input type="text" name="poste" value={{footballer.poste}}  />
+
+    <label for="name">Maitre : </label>
+    <select name="idmaster" id="idmaster"/>
+    {% for user in user %}
+    <option value={{user.id}}
+    {% if footballer.idmaster==user.id %}
+    selected
+    {% endif %}
+    >{{user.nom}}</option>
+
+    {% endfor %}
+    </select>
+
+    {% else %}
+<form method="post" name="formulaire" action="{{ url('footballer.save') }}">
+    <label for="name">Nom : </label>
+    <input type="text" name="nom" />
+    <label for="name">Prénom : </label>
+    <input type="text" name="prenom" />
+    <label for="name">Poste : </label>
+    <input type="text" name="poste" />
+    <label for="name">Maitre : </label>
+    <select name="idmaster" id="idmaster"/>
+
+    {% for user in user %}
+    <option value={{user.id}}>{{user.nom}}</option>
+    {% endfor %}
+    </select>
+
+    <!-- <input type="text" name="master" /> -->
+    {% endif %}
+    <button type="submit">Envoyer</button>
+
+
+
+</form>
